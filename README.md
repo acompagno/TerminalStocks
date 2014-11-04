@@ -1,2 +1,2 @@
-StocksCurses
+TerminalStocks
 ===
