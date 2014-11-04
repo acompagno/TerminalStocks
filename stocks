@@ -101,7 +101,7 @@ class DataFetcher:
                                          stock[1],
                                          stock[2],
                                          term_colors.DEFAULT))
-        system('clear')
+        system('clear && printf "\e[3J"')
         print config['separator'].join(texts)
 
     def stop(self):
