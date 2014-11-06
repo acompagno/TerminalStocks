@@ -1,4 +1,4 @@
-from urllib.request import urlopen
+from urllib2 import urlopen
 
 
 class Command:
