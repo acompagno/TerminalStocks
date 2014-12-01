@@ -3,7 +3,6 @@
 import sys
 import json
 import argparse
-import logging
 import stock_ticker
 from os.path import expanduser, isfile
 
@@ -16,11 +15,8 @@ config = dict(stock_symbols=[],
 
 
 def main(args):
-    logging.basicConfig(filename='/Users/noname/Desktop/example.log',
-                        level=logging.DEBUG)
     parse_config_file()
     parse_command_line_args()
-    logging.debug(config['no_curses'])
     if config['command'] == 'stock_ticker' and not config['no_curses']:
         command = stock_ticker.StockTickerCurses(config)
     elif config['command'] == 'stock_ticker' and config['no_curses']:
@@ -53,7 +49,6 @@ def parse_config_file():
 def parse_command_line_args():
     args_parser = build_command_line_parser()
     args = vars(args_parser.parse_args())
-    logging.debug('Hey {0}'.format(args['no_curses']))
     append_config(args)
 
 
