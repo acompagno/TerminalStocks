@@ -10,9 +10,10 @@ class color_pairs:
 
 class CursesWrapper:
 
-    def __init__(self):
+    def __init__(self, scroll_enabled=True, pad_multiplier=2):
+        self._scroll_enabled = scroll_enabled
         self.init_scr()
-        self.init_pad()
+        self.init_pad(pad_multiplier)
         self.init_colors()
 
     def init_scr(self):
@@ -22,9 +23,10 @@ class CursesWrapper:
         curses.curs_set(0)
         self._scr.keypad(1)
 
-    def init_pad(self):
+    def init_pad(self, pad_multiplier):
         self._max_y, self._max_x = self._scr.getmaxyx()
-        self._pad = curses.newpad(self._max_y * 2, self._max_x * 2)
+        self._pad = curses.newpad(self._max_y * pad_multiplier,
+                                  self._max_x * pad_multiplier)
         self._pad_row_pos = 0
         self._pad_col_pos = 0
         self._scr.refresh()
@@ -100,9 +102,10 @@ class CursesWrapper:
         self.scroll(0, 1)
 
     def scroll(self, increment_row, increment_col):
-        self._pad_row_pos += increment_row
-        self._pad_col_pos += increment_col
-        self.refresh()
+        if self._scroll_enabled:
+            self._pad_row_pos += increment_row
+            self._pad_col_pos += increment_col
+            self.refresh()
 
 
 def test():
