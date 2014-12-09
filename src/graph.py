@@ -82,7 +82,7 @@ def test():
             pass
     except Exception as e:
         if tg is not None:
-            tg._curzez.close_scr()
+            tg.close_scr()
         print(e)
 
 if __name__ == '__main__':
