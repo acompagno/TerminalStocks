@@ -22,7 +22,7 @@ class StockTicker(Command):
 
     def parse_data(self, data, stocks):
         parsed_data = []
-        split_data = str(data).split('\r\n')
+        split_data = str(data).split('\n')
         for stock, price_percentage in zip(stocks, split_data):
             split_price_percentage = price_percentage.split(',')
             price = split_price_percentage[0]
